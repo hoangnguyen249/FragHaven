@@ -1,22 +1,45 @@
-<h1>New Product</h1>
-<%= form_with(model: @product) do |form| %>
+<%= form_with(model: @product,data: { turbo: false }) do |form| %>
   <%= csrf_meta_tags %>
 
   <div>
+  <% invalid = @product.errors.include?(:name)%>
     <%= form.label :name %>
     <%= form.text_field :name %>
+    <% if invalid %>
+        <p style="color:red">
+          <%=  @product.errors.full_messages_for(:name).join(" ,")%>
+        </p>
+      <% end %>
   </div>
   <div>
+  <% invalid =  @product.errors.include?(:description)%>
     <%= form.label :description %>
     <%= form.text_area :description, rows: 5 %>
+    <% if invalid %>
+        <p style="color:red">
+          <%=  @product.errors.full_messages_for(:description).join(" ,")%>
+        </p>
+      <% end %>
   </div>
   <div>
+  <% invalid =  @product.errors.include?(:price)%>
     <%= form.label :price %>
     <%= form.number_field :price %>
+    <% if invalid %>
+        <p style="color:red">
+          <%=  @product.errors.full_messages_for(:price).join(" ,")%>
+        </p>
+      <% end %>
   </div>
   <div>
+  <% invalid =  @product.errors.include?(:quantity)%>
     <%= form.label :quantity %>
     <%= form.number_field :quantity %>
+    <% if invalid %>
+        <p style="color:red">
+          <%=  @product.errors.full_messages_for(:quantity).join(" ,")%>
+        </p>
+      <% end %>
   </div>
 
   <div>

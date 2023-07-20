@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: %i[show edit update destroy]
   def index
     @products = Product.all
   end
@@ -9,7 +10,10 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    puts "New Product Action Reached!"
+  end
+
+  def edit
+    @product = Product.find(params[:id])
   end
 
   def create
@@ -19,10 +23,6 @@ class ProductsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @product = Product.find(params[:id])
   end
 
   def update
@@ -41,6 +41,10 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
   def product_params
     params.require(:product).permit(:name, :description, :price, :quantity)
