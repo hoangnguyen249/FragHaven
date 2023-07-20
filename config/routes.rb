@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   get 'pages/home'
   get 'pages/about'
+  resources :products
   root "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
