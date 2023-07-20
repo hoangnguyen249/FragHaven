@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   get 'pages/about'
   resources :products
   root "pages#home"
+  get 'products/category_select'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  get '/products/by_category', to: 'products#by_category', as: 'products_by_category'
   # Defines the root path route ("/")
   # root "articles#index"
 end
