@@ -1,6 +1,8 @@
 <%= form_with(model: @product,data: { turbo: false }) do |form| %>
   <%= csrf_meta_tags %>
-
+    <div>
+      <%= form.text_field :user_id, type: "hidden", value: current_user.id %>
+    </div>
   <div>
   <% invalid = @product.errors.include?(:name)%>
     <%= form.label :name %>
@@ -41,8 +43,11 @@
         </p>
       <% end %>
   </div>
+  <div>
+    <%= form.file_field :images, multiple:true %>
+  </div>
 
   <div>
-    <%= form.submit "Create Product" %>
+    <%= form.submit %>
   </div>
 <% end %>
