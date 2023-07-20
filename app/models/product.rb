@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
 
-  belongs_to :user
+  belongs_to :user, optional: true
   # AR validations to ensure data integrity
   validates :name, presence: true
   validates :description, presence: true
