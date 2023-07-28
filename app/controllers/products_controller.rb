@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @products = Product.all
   end
@@ -40,6 +42,8 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: 'Product was successfully destroyed.'
   end
 
+
+
   private
 
   def set_product
@@ -47,6 +51,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity)
+    params.require(:product).permit(:name, :description, :price, :quantity, :user_id, images: [])
   end
 end
