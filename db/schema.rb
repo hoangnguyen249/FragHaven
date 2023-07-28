@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_20_154853) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_20_172504) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,13 +45,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_154853) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "product_categories", force: :cascade do |t|
+  create_table "categories_products", force: :cascade do |t|
     t.integer "product_id"
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_product_categories_on_category_id"
-    t.index ["product_id"], name: "index_product_categories_on_product_id"
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -61,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_154853) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_154853) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "product_categories", "categories"
-  add_foreign_key "product_categories", "products"
+  add_foreign_key "categories_products", "categories"
+  add_foreign_key "categories_products", "products"
   add_foreign_key "products", "users"
 end

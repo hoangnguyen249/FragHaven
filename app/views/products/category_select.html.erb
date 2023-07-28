@@ -1,5 +1,0 @@
-
-<%= form_with(url: products_by_category_path, method: :get) do |f| %>
-  <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Select a category' }) %>
-  <%= f.submit "Show Products" %>
-<% end %>

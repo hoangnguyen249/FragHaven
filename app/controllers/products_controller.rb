@@ -42,10 +42,7 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: 'Product was successfully destroyed.'
   end
 
-  def by_category
-    @category = Category.find(params[:category_id])
-    @products = @category.products
-  end
+
 
   private
 
