@@ -16,7 +16,7 @@
     user_id: 1
   )
 end
-=end
+
 
 # Create four categories for the four seasons
 %w[Spring Summer Autumn Winter].each do |season|
@@ -31,5 +31,5 @@ products.each do |product|
   random_category = categories.sample
   product.categories << random_category
 end
-
+=end
 

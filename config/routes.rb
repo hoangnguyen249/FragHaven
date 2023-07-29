@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   end
   get 'pages/home'
   get 'pages/about'
-  resources :products
+  resources :products do
+    collection do
+      get 'search'
+    end
+  end
   root "pages#home"
 
   resources :categories, only: [:index, :show]
