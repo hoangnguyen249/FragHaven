@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @products = Product.all
+    @products = Product.all.page(params[:page]).per(20)
+
   end
 
   def show
@@ -41,7 +42,24 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to products_path, notice: 'Product was successfully destroyed.'
   end
+  def search
 
+    @categories = Category.all
+
+    if params[:keyword].present?
+      keyword = "%#{params[:keyword]}%"
+
+      @products = Product.where('products.name LIKE :keyword OR products.description LIKE :keyword', keyword: keyword)
+    else
+      @products = Product.all
+    end
+
+    if params[:category_id].present?
+      category_id = params[:category_id]
+
+      @products = @products.joins(:categories).where('categories.id': category_id)
+    end
+  end
 
 
   private
@@ -53,4 +71,6 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :description, :price, :quantity, :user_id, images: [])
   end
+
+
 end

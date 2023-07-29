@@ -9,9 +9,17 @@
       <li class="nav-item">
           <%= link_to "Product List", products_path, class: "nav-link"%>
         </li>
-        <li class="nav-item">
-          <%= link_to "Category", categories_path, class: "nav-link"%>
-        </li>
+
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= Category %>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+    <% Category.all.each do |category| %>
+    <li><%= link_to category.name, category_path(category), class:"dropdown-item" %></li>
+    <% end %>
+      </ul>
+    </li>
       </ul>
      <ul class="navbar-nav">
         <%= render 'user/session_manager' %>
