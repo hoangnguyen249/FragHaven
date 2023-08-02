@@ -1,7 +1,6 @@
-<h1>Products</h1>
 <%= form_tag search_products_path, method: :get do %>
   <%= text_field_tag :keyword, params[:keyword], placeholder: 'Search by keyword' %>
-  <select name="category_id" class="form-control" style = "width: 200px" >
+  <select name="category_id" class="form-control" style="width: 200px">
     <option value="">Select a category</option>
     <% Category.all.each do |category| %>
       <option value="<%= category.id %>"><%= category.name %></option>
@@ -10,8 +9,10 @@
   <%= submit_tag 'Search' %>
 <% end %>
 
+<% if current_user && current_user.admin? %>
+  <%= link_to 'New Product', new_product_path %>
+<% end %>
 
-<%= link_to 'New Product', new_product_path %>
 <%= paginate @products %>
 <table class="table">
   <thead>
@@ -31,17 +32,18 @@
         <td><%= product.description %></td>
         <td><%= product.price %></td>
         <td><%= product.quantity %></td>
-        <td><% product.images.each do |image| %>
-    <%= image_tag(image, style: "
-      max-width: 50%;
-  height: auto; object-fit: contain;") %>
-  <% end %></td>
+        <td>
+          <% product.images.each do |image| %>
+            <%= image_tag(image, style: "max-width: 50%; height: auto; object-fit: contain;") %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= button_to 'Delete', product_path(product), method: :delete %></td>
+
+        <% if current_user && current_user.admin? %>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= button_to 'Delete', product_path(product), method: :delete %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-
