@@ -25,6 +25,10 @@
   height: auto; object-fit: contain;") %>
   <% end %></td>
         <td><%= link_to 'Show', product %></td>
+        <% if current_user && current_user.admin? %>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= button_to 'Delete', product_path(product), method: :delete %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
