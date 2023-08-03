@@ -31,5 +31,21 @@ products.each do |product|
   random_category = categories.sample
   product.categories << random_category
 end
+require 'httparty'
+
+def fetch_random_image_url
+  response = HTTParty.get('https://picsum.photos/seed/picsum/500/500')
+  return response.request.last_uri.to_s
+end
+
+
+products_without_images = Product.where.not(id: Product.joins(:images_attachments))
+
+
+products_without_images.each do |product|
+  random_image_url = fetch_random_image_url
+  product.images.attach(io: URI.open(random_image_url), filename: 'random_image.jpg')
+end
+products_without_images.each(&:save)
 =end
 
