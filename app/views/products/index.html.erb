@@ -1,3 +1,4 @@
+<%= render partial: "cart/cart" if @render_cart %>
 <%= form_tag search_products_path, method: :get do %>
   <%= text_field_tag :keyword, params[:keyword], placeholder: 'Search by keyword' %>
   <select name="category_id" class="form-control" style="width: 200px">
@@ -73,6 +74,11 @@
         <% else %>
           <%= button_to "Set On Sale", update_sale_status_product_path(product), method: :patch, params: { on_sale: true }, class: 'btn btn-success' %>
         <% end %></td>
+        <td><%= form_with(url: cart_add_path) do |f| %>
+      <%= f.hidden_field :id, value: product.id %>
+      <%= f.number_field :quantity, value: 0, min: 1 %>
+      <%= f.submit "Add To Cart" %>
+    <% end %></td>
         <% end %>
       </tr>
     <% end %>
