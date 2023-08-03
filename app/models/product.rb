@@ -8,6 +8,8 @@ class Product < ApplicationRecord
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   has_and_belongs_to_many :categories
   has_many_attached :images
+  has_many :orderables
+  has_many :carts, through: :orderables
 
   scope :on_sale, -> { where(on_sale: true) }
 
