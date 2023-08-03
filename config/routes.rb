@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :products do
     collection do
+      patch :update_sale_status, on: :member
       get 'search'
     end
   end
