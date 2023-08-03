@@ -1,0 +1,24 @@
+
+<h1>All Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td>
+          <% if current_user && current_user.admin? %>
+          <%= link_to "Edit", edit_category_path(category) %>
+          <%= button_to "Delete", category_path(category), method: :delete%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
