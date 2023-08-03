@@ -62,6 +62,12 @@ class ProductsController < ApplicationController
     end
   end
 
+def update_sale_status
+    @product = Product.find(params[:id])
+    @product.update(on_sale: params[:on_sale], sale_price: (params[:on_sale] ? @product.price * 0.5 : nil))
+
+    redirect_to products_path
+  end
 
   private
 
