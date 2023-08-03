@@ -8,7 +8,13 @@
   </select>
   <%= submit_tag 'Search' %>
 <% end %>
-
+<div class="filter-form">
+  <%= form_with(url: products_path, method: :get) do |form| %>
+    <%= form.label :filter, 'Filter by:' %>
+    <%= form.select :filter, options_for_select([['Sale', 'sale'], ['New', 'new']]), include_blank: 'All' %>
+    <%= form.submit 'Apply' %>
+  <% end %>
+</div>
 <% if current_user && current_user.admin? %>
   <%= link_to 'New Product', new_product_path %>
 <% end %>
@@ -23,6 +29,11 @@
       <th scope="col">Quantity</th>
       <th scope="col">Image</th>
       <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -30,18 +41,38 @@
       <tr>
         <td><%= product.name %></td>
         <td><%= product.description %></td>
+        <% if product.on_sale %>
+        <td><%= product.sale_price %></td>
+        <% else %>
         <td><%= product.price %></td>
+        <%end%>
         <td><%= product.quantity %></td>
         <td>
           <% product.images.each do |image| %>
             <%= image_tag(image, style: "max-width: 50%; height: auto; object-fit: contain;") %>
           <% end %>
         </td>
+        <td>
+      <% if product.on_sale %>
+        <span class="badge bg-secondary">Sale</span>
+      <% end %>
+    </td>
+    <td>
+    <% if product.created_at >= 3.days.ago %>
+            <span class="badge bg-success">New</span>
+          <% end %>
+    </td>
         <td><%= link_to 'Show', product %></td>
 
         <% if current_user && current_user.admin? %>
           <td><%= link_to 'Edit', edit_product_path(product) %></td>
           <td><%= button_to 'Delete', product_path(product), method: :delete %></td>
+          <td>
+          <% if product.on_sale %>
+          <%= button_to "Set Off Sale", update_sale_status_product_path(product), method: :patch, params: { on_sale: false }, class: 'btn btn-danger' %>
+        <% else %>
+          <%= button_to "Set On Sale", update_sale_status_product_path(product), method: :patch, params: { on_sale: true }, class: 'btn btn-success' %>
+        <% end %></td>
         <% end %>
       </tr>
     <% end %>
