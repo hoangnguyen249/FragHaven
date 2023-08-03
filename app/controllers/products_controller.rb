@@ -4,9 +4,12 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.page(params[:page]).per(20)
-
+    if params[:filter] == 'sale'
+      @products = Product.on_sale.page(params[:page]).per(20)
+    elsif params[:filter] == 'new'
+      @products = Product.new_within_three_days.page(params[:page]).per(20)
+    end
   end
-
   def show
     @product = Product.find(params[:id])
   end
