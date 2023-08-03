@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'pages/about'
   resources :products do
     collection do
+      patch :update_sale_status, on: :member
       get 'search'
     end
   end
