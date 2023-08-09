@@ -10,7 +10,7 @@
 100.times do
   Product.create(
     name: Faker::Commerce.product_name,
-    description: Faker::Lorem.paragraph,
+    description: Faker::Hipster.sentence,
     price: Faker::Commerce.price(range: 10..100),
     quantity: Faker::Number.between(from: 1, to: 100),
     user_id: 1
