@@ -15,9 +15,7 @@ Rails.application.routes.draw do
     end
   end
   root "pages#home"
-  get 'admin/index'
   resources :categories
-get 'users/public_index', to: 'users#public_index'
 get 'cart', to: 'cart#show'
 post 'cart/add'
 post 'cart/remove'
