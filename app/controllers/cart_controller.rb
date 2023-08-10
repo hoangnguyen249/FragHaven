@@ -46,6 +46,7 @@ class CartController < ApplicationController
 
           UserOrder.create(user_id: current_user.id, order_id: order.id)
         end
+        @cart.clear_cart
 
 
         redirect_to cart_path, notice: "Checkout successful. Your order has been placed."
