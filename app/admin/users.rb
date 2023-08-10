@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :role, :street_address, :city, :postal_code, :province_id
+  permit_params :email, :password, :password_confirmation, :role
 
   index do
     selectable_column
@@ -25,16 +25,11 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :role
-      f.input :street_address
-      f.input :city
-      f.input :province
-      f.input :postal_code
     end
     f.actions
   end
 
   filter :email
   filter :role
-
   filter :created_at
 end
