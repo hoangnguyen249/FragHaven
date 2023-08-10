@@ -8,8 +8,8 @@
       <%= product.price %>
       <%= form_with(url: cart_add_path) do |f| %>
         <%= f.hidden_field :id, value: product.id %>
-        <%= f.number_field :quantity, value: orderable.quantity, min: 0 %>
-        <%= f.submit "Add To Cart" %>
+        <%= f.number_field :quantity, value: orderable.quantity, min: 1 %>
+        <%= f.submit "Update" %>
       <% end %>
       <%= form_with(url: cart_remove_path) do |f| %>
         <%= f.hidden_field :id, value: orderable.id %>

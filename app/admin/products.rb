@@ -1,7 +1,5 @@
-# app/admin/product.rb
-
 ActiveAdmin.register Product do
-  permit_params :name, :description, :price, :quantity, :categories, images: []
+  permit_params :name, :description, :price, :quantity, :category_ids, images: []
 
   index do
     selectable_column
@@ -16,6 +14,7 @@ ActiveAdmin.register Product do
         "No Image"
       end
     end
+    column :categories
     actions
   end
 
@@ -46,13 +45,27 @@ ActiveAdmin.register Product do
       f.input :quantity
       f.input :images, as: :file, input_html: { multiple: true }
       f.input :category_ids, as: :select, collection: Category.all, label: 'Category'
+      f.input :user_id, as: :select, collection: User.all, label: 'User'
     end
     f.actions
   end
 
+  controller do
+    def create
+      @product = Product.new(permitted_params[:product])
+      @product.user = current_user
+
+      if @product.save
+        redirect_to admin_product_path(@product), notice: 'Product was successfully created.'
+      else
+        render :new
+      end
+    end
+  end
   filter :name
-  filter :category
+  filter :description
   filter :price
   filter :quantity
-  filter :image
+  filter :images
+  filter :category_ids
 end
