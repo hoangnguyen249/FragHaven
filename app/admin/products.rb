@@ -45,7 +45,6 @@ ActiveAdmin.register Product do
       f.input :quantity
       f.input :images, as: :file, input_html: { multiple: true }
       f.input :category_ids, as: :select, collection: Category.all, label: 'Category'
-      f.input :user_id, as: :select, collection: User.all, label: 'User'
     end
     f.actions
   end

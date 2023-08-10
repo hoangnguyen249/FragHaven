@@ -6,10 +6,6 @@ ActiveAdmin.register User do
     id_column
     column :email
     column :role
-    column :street_address
-    column :city
-    column :province
-    column :postal_code
     column :created_at
     actions
   end
@@ -19,10 +15,6 @@ ActiveAdmin.register User do
       row :id
       row :email
       row :role
-      row :street_address
-      row :city
-      row :province
-      row :postal_code
       row :created_at
     end
   end
@@ -43,9 +35,6 @@ ActiveAdmin.register User do
 
   filter :email
   filter :role
-  filter :street_address
-  filter :city
-  filter :province
-  filter :postal_code
+
   filter :created_at
 end
