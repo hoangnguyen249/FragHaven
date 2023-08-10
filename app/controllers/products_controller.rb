@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
+
   def index
     @products = Product.all.page(params[:page]).per(20)
     if params[:filter] == 'sale'

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
   devise_scope :user do
     get '/users', to: 'devise/registrations#new'
     get '/users/password', to: 'devise/passwords#new'
@@ -15,9 +20,7 @@ Rails.application.routes.draw do
     end
   end
   root "pages#home"
-  get 'admin/index'
   resources :categories
-get 'users/public_index', to: 'users#public_index'
 get 'cart', to: 'cart#show'
 post 'cart/add'
 post 'cart/remove'

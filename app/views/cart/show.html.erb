@@ -4,3 +4,16 @@
   <p><%= product.name %> * <%= orderable.quantity %> = $<%= product.price * orderable.quantity %></p>
 <% end %>
 <p>Your total is $<%= @cart.total %> </p>
+
+<% if current_user && current_user.province %>
+  <% if current_user.street_address.blank? || current_user.city.blank? || current_user.postal_code.blank? ||  current_user.province.blank? %>
+     <p>Please <a href="<%= edit_user_registration_path %>">update your address</a></p>
+    <%end%>
+  <% province = current_user.province %>
+  <p>Shipping to: <%= current_user.street_address %>, <%= current_user.city %>, <%= province.name %>, <%= current_user.postal_code %></p>
+<p>Taxes (PST <%= province.pst * 100 %>%, GST <%= province.gst * 100 %>%, HST <%= province.hst * 100 %>%): $</p>
+<% else %>
+<p>Please <%= link_to "Sign Up", new_user_registration_path%> / <%= link_to "Login", new_user_session_path %>
+
+  </p>
+<% end %>

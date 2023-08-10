@@ -44,5 +44,26 @@ products.each do |product|
   product.images.attach(io: URI.open(random_image_url), filename: 'random_image.jpg')
 end
 products.each(&:save)
+
+provinces_data = [
+  { name: 'Alberta', pst: 0.0, gst: 0.05, hst: 0.0 },
+  { name: 'British Columbia', pst: 0.07, gst: 0.05, hst: 0.0 },
+  { name: 'Manitoba', pst: 0.07, gst: 0.05, hst: 0.0 },
+  { name: 'New Brunswick', pst: 0.0, gst: 0.0, hst: 0.15 },
+  { name: 'Newfoundland and Labrador', pst: 0.0, gst: 0.0, hst: 0.15 },
+  { name: 'Northwest Territories', pst: 0.0, gst: 0.05, hst: 0.0 },
+  { name: 'Nova Scotia', pst: 0.0, gst: 0.0, hst: 0.15 },
+  { name: 'Nunavut', pst: 0.0, gst: 0.05, hst: 0.0 },
+  { name: 'Ontario', pst: 0.0, gst: 0.0, hst: 0.13 },
+  { name: 'Prince Edward Island', pst: 0.0, gst: 0.0, hst: 0.15 },
+  { name: 'Quebec', pst: 0.09975, gst: 0.05, hst: 0.0 },
+  { name: 'Saskatchewan', pst: 0.06, gst: 0.05, hst: 0.0 },
+  { name: 'Yukon', pst: 0.0, gst: 0.05, hst: 0.0 }
+]
+
+provinces_data.each do |province_data|
+  Province.create(province_data)
 =end
+
+
 
