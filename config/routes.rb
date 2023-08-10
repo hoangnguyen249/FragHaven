@@ -21,12 +21,13 @@ Rails.application.routes.draw do
   end
   root "pages#home"
   resources :categories
+
 get 'cart', to: 'cart#show'
 post 'cart/add'
 post 'cart/remove'
+get 'cart/checkout', to: 'cart#checkout', as: :cart_checkout
 
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # root "articles#index"
+
 end

@@ -3,4 +3,6 @@ class Category < ActiveRecord::Base
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "name", "updated_at"]
   end
+  validates_presence_of :name
+  validates_uniqueness_of :name
 end

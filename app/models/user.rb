@@ -4,7 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
  has_many :products
+ has_many :user_orders
+ has_many :orders, through: :user_orders
  belongs_to :province
+ has_one :cart
+ validates :email, presence: true, uniqueness: true
+  validates :encrypted_password, presence: true
+  validates :role, presence: true
+  validates :street_address, presence: true
+  validates :city, presence: true
+  validates :postal_code, presence: true
+  validates :province, presence: true
  private
  def self.ransackable_attributes(auth_object = nil)
   ["created_at", "email", "encrypted_password", "id", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at"]
