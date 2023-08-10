@@ -44,11 +44,7 @@ products.each do |product|
   product.images.attach(io: URI.open(random_image_url), filename: 'random_image.jpg')
 end
 products.each(&:save)
-=end
 
-# db/seeds.rb
-
-# Create provinces
 provinces_data = [
   { name: 'Alberta', pst: 0.0, gst: 0.05, hst: 0.0 },
   { name: 'British Columbia', pst: 0.07, gst: 0.05, hst: 0.0 },
@@ -67,4 +63,7 @@ provinces_data = [
 
 provinces_data.each do |province_data|
   Province.create(province_data)
-end
+=end
+
+
+
